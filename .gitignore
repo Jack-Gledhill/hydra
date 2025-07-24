@@ -1,0 +1,4 @@
+secret-*.yml
+!sealed.*.yml
+.idea/
+.vscode/

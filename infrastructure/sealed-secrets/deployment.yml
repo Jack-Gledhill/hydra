@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sealed-secrets
+spec:
+  template:
+    spec:
+      serviceAccountName: sealed-secrets
+      securityContext:
+        fsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 1001
+      containers:
+        - name: sealed-secrets
+          image: docker.io/bitnami/sealed-secrets-controller:0.30.0
+          command:
+            - controller
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 8081
+              name: metrics
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

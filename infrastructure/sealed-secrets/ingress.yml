@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sealed-secrets
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "false"
+spec:
+  rules:
+    - host: hydra.starsystem.dev
+      http:
+        paths:
+          - path: /v1/cert.pem
+            pathType: Prefix
+            backend:
+              service:
+                name: sealed-secrets
+                port:
+                  number: 8080
