@@ -7,10 +7,10 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "false"
 spec:
   rules:
-    - host: hydra.starsystem.dev
+    - host: cert.hydra.starsystem.dev
       http:
         paths:
-          - path: /v1/cert.pem
+          - path: /
             pathType: Prefix
             backend:
               service:
