@@ -38,7 +38,7 @@ rules:
     verbs:
       - update
   - apiGroups:
-      - traefik.io/v1alpha1
+      - traefik.io
     resources:
       - middlewares
     verbs:
