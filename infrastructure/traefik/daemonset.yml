@@ -33,6 +33,7 @@ spec:
               port: 8080
           args:
             - --providers.kubernetesingress # Becomes the cluster's Ingress controller
+            - --providers.kubernetescrd # Enables the use of CRDs for configuration
             - --ping # Enables the ping endpoint for healthchecking Traefik
             - --global.sendanonymoususage=false
             - --api.dashboard=true # Enables the Traefik dashboard
@@ -47,7 +48,7 @@ spec:
             - --entrypoints.web.http.redirections.entrypoint.to=websecure # Redirects HTTP requests to HTTPS
             - --entrypoints.web.http.redirections.entrypoint.scheme=https
             - --entrypoints.websecure.address=:443
-            - --entrypoints.websecure.http.middlewares=cors-middleware@kubernetescrd # Responds to CORS requests on all routes
+            - --entrypoints.websecure.http.middlewares=traefik-cors-middleware@kubernetescrd # Responds to CORS requests on all routes
             - --entrypoints.websecure.http.tls=true
             - --entrypoints.websecure.forwardedheaders.insecure=false
             - --entrypoints.websecure.forwardedheaders.trustedips=10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,fc00::/7
