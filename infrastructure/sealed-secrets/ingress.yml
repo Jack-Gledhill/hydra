@@ -4,9 +4,13 @@ metadata:
   name: sealed-secrets
   namespace: kube-system
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "false"
 spec:
+  tls:
+    - hosts:
+        - sealed-secrets.hydra.starsystem.dev
+      secretName: sealed-secrets-tls
   rules:
     - host: sealed-secrets.hydra.starsystem.dev
       http:
