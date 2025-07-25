@@ -2,13 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: traefik-dashboard
+  namespace: traefik
   annotations:
     prometheus.starsystem.dev/scrape: "true"
     prometheus.starsystem.dev/scheme: http
     prometheus.starsystem.dev/path: /metrics
-    prometheus.starsystem.dev/port: "8008"
+    prometheus.starsystem.dev/port: "8080"
     metallb.io/loadBalancerIPs: 10.1.16.4
 spec:
+  selector:
+    app: traefik
   type: LoadBalancer
   ports:
     - name: dashboard
