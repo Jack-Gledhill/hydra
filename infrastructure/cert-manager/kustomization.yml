@@ -7,6 +7,6 @@ labels:
     includeSelectors: true
     includeTemplates: true
 resources:
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.18.0/cert-manager.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
   - sealed.secret-acme-dns.yml
   - cluster-issuer.yml
