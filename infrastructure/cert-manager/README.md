@@ -33,3 +33,17 @@ In the rare exceptions where other domains may be used, I will create scoped Iss
 
 Certificates are requested by adding an annotation to the Ingress resource, rather than directly through Traefik.
 This allows Ingress resources to use different Issuers if needed, while still using the same Traefik configuration.
+
+## Development Log
+
+### 7th July 2025
+
+Was having issues with `ClusterIssuer` failing to apply due to the validating webhook failing. 
+Ostensibly, the issue was the certificate used for the webhook was not signed by a trusted authority. 
+
+After many hours of digging, I figured out that cert-manager's `cainjector` pod was meant to add this certificate to the cluster's trusted CA bundle, but it was failing to do so. 
+This was because the `cainjector` pod was silently failing to create lease objects (used for leader election) in the `kube-system` namespace on account of missing permissions. 
+It wasn't until I had taken a deep look at the RBAC manifests that I realised that permissions for lease objects was controlled by a Role that was meant to be in the `kube-system` namespace. 
+The namespace was being overwritten by kustomize to be in the `cert-manager` namespace, which meant `cainjector` was unable to create the objects it needed and therefore failed to add the certificate to the cluster's trusted CA bundle. 
+
+The fix was infuriatingly simple: remove the namespace field from the Kustomize object.
