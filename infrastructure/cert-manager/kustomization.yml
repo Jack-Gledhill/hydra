@@ -2,6 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager
 resources:
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
+  - namespace.yml
+  - custom-resource-definitions.yml
+  - service-accounts.yml
+  - cluster-roles.yml
+  - cluster-role-bindings.yml
+  - roles.yml
+  - role-bindings.yml
+  - deployments.yml
+  - services.yml
+  - mutating-webhook-configuration.yml
+  - validating-webhook-configuration.yml
   - sealed.secret-acme-dns.yml
   - cluster-issuer.yml
