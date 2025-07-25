@@ -6,3 +6,12 @@ resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
   - sealed.secret-acme-dns.yml
   - cluster-issuer.yml
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --dns01-recursive-nameservers=1.0.0.1:53,1.1.1.1:53
+    target:
+      kind: Deployment
+      name: cert-manager
