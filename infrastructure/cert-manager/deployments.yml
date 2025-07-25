@@ -41,7 +41,7 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             - --v=2
-            - --leader-election-namespace=kube-system
+            - --leader-election-namespace=$(POD_NAMESPACE) # I had to copy over 15000 lines just to change this
           ports:
             - containerPort: 9402
               name: http-metrics
@@ -104,7 +104,7 @@ spec:
           args:
             - --v=2
             - --cluster-resource-namespace=$(POD_NAMESPACE)
-            - --leader-election-namespace=cert-manager # I had to copy over 15000 lines just to change this from kube-system to cert-manager
+            - --leader-election-namespace=$(POD_NAMESPACE)
             - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.18.2
             - --max-concurrent-challenges=60
           ports:
