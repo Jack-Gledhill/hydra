@@ -7,8 +7,9 @@ metadata:
     prometheus.starsystem.dev/scheme: http
     prometheus.starsystem.dev/path: /metrics
     prometheus.starsystem.dev/port: "8081"
+    metallb.io/loadBalancerIPs: 10.1.16.2
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: cert
       port: 8080

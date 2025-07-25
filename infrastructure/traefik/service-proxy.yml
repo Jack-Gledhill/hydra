@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: traefik-proxy
   annotations:
-    metallb.io/loadBalancerIPs: 10.1.16.1
+    metallb.io/loadBalancerIPs: 10.1.16.3
 spec:
   type: LoadBalancer
   ports:
