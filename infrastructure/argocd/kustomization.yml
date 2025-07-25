@@ -9,3 +9,11 @@ patches:
       name: argocd-server
       namespace: argocd
     path: service-patch.yml
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --insecure
+    target:
+      kind: Deployment
+      name: argocd-server
+      namespace: argocd
