@@ -10,7 +10,7 @@ spec:
     - host: cert.hydra.starsystem.dev
       http:
         paths:
-          - path: /
+          - path: /v1/cert.pem
             pathType: Prefix
             backend:
               service:
