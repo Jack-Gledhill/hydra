@@ -15,7 +15,7 @@ spec:
     - host: traefik.hydra.starsystem.dev
       http:
         paths:
-          - path: /dashboard/
+          - path: /
             pathType: Prefix
             backend:
               service:
