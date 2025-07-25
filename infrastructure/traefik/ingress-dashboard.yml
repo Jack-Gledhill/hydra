@@ -9,13 +9,13 @@ metadata:
 spec:
   tls:
     - hosts:
-        - traefik.hydra.starsystem.dev
+        - hydra.starsystem.dev
       secretName: traefik-dashboard-tls
   rules:
-    - host: traefik.hydra.starsystem.dev
+    - host: hydra.starsystem.dev
       http:
         paths:
-          - path: /
+          - path: /dashboard/
             pathType: Prefix
             backend:
               service:
