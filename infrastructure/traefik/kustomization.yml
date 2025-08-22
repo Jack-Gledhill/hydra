@@ -6,7 +6,7 @@ resources:
   - service-account.yml
   - cluster-role.yml
   - cluster-role-binding.yml
-  - crd-middleware.yml
+  - crds.yml
   - middleware-basic-auth.yml
   - middleware-cors.yml
   - daemonset.yml
