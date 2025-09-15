@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: youtrack
+  name: apps
   labels:
     # Prevent privilege escalation
     pod-security.kubernetes.io/enforce: baseline
