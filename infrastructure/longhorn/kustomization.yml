@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - https://raw.githubusercontent.com/longhorn/longhorn/v1.9.0/deploy/longhorn.yaml
   - ingress.yml
-  - storage-class.yml
 
 patches:
   - target:
@@ -11,3 +10,7 @@ patches:
       name: longhorn-frontend
       namespace: longhorn-system
     path: service-patch.yml
+  - target:
+      kind: StorageClass
+      name: longhorn
+    path: storage-class-patch.yml
