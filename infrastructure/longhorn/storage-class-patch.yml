@@ -24,7 +24,5 @@ data:
       backupTargetName: "sagittarius" # Backs up to Sagittarius via NFS
       dataLocality: "best-effort"
       replicaAutoBalance: "best-effort" # When new nodes are available, replicas are rebalanced
-      diskSelector: "ssd,fast"
-      nodeSelector: "storage,fast"
       freezeFilesystemForSnapshot: "enabled" # Freezes filesystem before snapshotting
       recurringJobSelector: '[{"name":"backup-daily", "isGroup":true},{"name":"snapshot-hourly", "isGroup":true},{"name":"snapshot-cleanup-weekly", "isGroup":true},{"name":"trim-weekly", "isGroup":true}]'
