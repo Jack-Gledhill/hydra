@@ -149,7 +149,7 @@ data:
       Personal:
         - title: Cloudflare
           description: Domain registration & management
-          link: https://cloudflare.com
+          link: https://dash.cloudflare.com
           icon:
             name: devicon:cloudflare
             wrap: true
