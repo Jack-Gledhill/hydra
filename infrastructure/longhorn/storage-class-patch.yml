@@ -1,23 +1,30 @@
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: longhorn
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: driver.longhorn.io
-allowVolumeExpansion: true
-reclaimPolicy: Delete # Space is freed when PVC is deleted
-volumeBindingMode: Immediate
-# See here for full list of parameters: https://longhorn.io/docs/1.9.1/references/storage-class-parameters/
-parameters:
-  numberOfReplicas: "3"
-  staleReplicaTimeout: "30" # Minutes
-  fromBackup: "" # URL of a backup to be restored from, empty in production
-  fsType: "ext4"
-  backupTargetName: "sagittarius" # Backs up to Sagittarius via NFS
-  dataLocality: "best-effort"
-  replicaAutoBalance: "best-effort" # When new nodes are available, replicas are rebalanced
-  diskSelector: "" # No disk selector, use all available disks
-  nodeSelector: "" # No node selector, use all available nodes
-  freezeFilesystemForSnapshot: "enabled" # Freezes filesystem before snapshotting
-  recurringJobSelector: '[{"name":"backup-daily", "isGroup":true},{"name":"snapshot-hourly", "isGroup":true},{"name":"snapshot-cleanup-weekly", "isGroup":true},{"name":"trim-weekly", "isGroup":true}]'
+  name: longhorn-storageclass
+  namespace: longhorn-system
+data:
+  storageclass.yaml: |
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: longhorn
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+    provisioner: driver.longhorn.io
+    allowVolumeExpansion: true
+    reclaimPolicy: Delete # Space is freed when PVC is deleted
+    volumeBindingMode: Immediate
+    # See here for full list of parameters: https://longhorn.io/docs/1.9.1/references/storage-class-parameters/
+    parameters:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "30" # Minutes
+      fromBackup: "" # URL of a backup to be restored from, empty in production
+      fsType: "ext4"
+      backupTargetName: "sagittarius" # Backs up to Sagittarius via NFS
+      dataLocality: "best-effort"
+      replicaAutoBalance: "best-effort" # When new nodes are available, replicas are rebalanced
+      diskSelector: "" # No disk selector, use all available disks
+      nodeSelector: "" # No node selector, use all available nodes
+      freezeFilesystemForSnapshot: "enabled" # Freezes filesystem before snapshotting
+      recurringJobSelector: '[{"name":"backup-daily", "isGroup":true},{"name":"snapshot-hourly", "isGroup":true},{"name":"snapshot-cleanup-weekly", "isGroup":true},{"name":"trim-weekly", "isGroup":true}]'
