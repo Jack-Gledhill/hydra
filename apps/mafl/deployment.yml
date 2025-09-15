@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mafl
+  annotations:
+    configmap.reloader.stakater.com/reload: "mafl-config"
 spec:
   replicas: 1
   selector:
