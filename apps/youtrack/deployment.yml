@@ -12,6 +12,10 @@ spec:
       labels:
         app: youtrack
     spec:
+      securityContext:
+        runAsUser: 13001
+        runAsGroup: 13001
+        fsGroup: 13001
       containers:
         - name: youtrack
           image: jetbrains/youtrack:2025.2.94372
@@ -22,7 +26,7 @@ spec:
             - name: backups
               mountPath: /opt/youtrack/backups
             - name: config
-              mountPath: /opt/youtrack/config
+              mountPath: /opt/youtrack/conf
             - name: data
               mountPath: /opt/youtrack/data
       volumes:
