@@ -5,7 +5,6 @@ metadata:
   annotations:
     starsystem.dev/tenant-name: Jack Gledhill
     starsystem.dev/tenant-email: me@jackgledhill.com
-    starsystem.dev/tenant-phone: "+447452980847"
   labels:
     starsystem.dev/tenant: "true"
     # Prevent privilege escalation
