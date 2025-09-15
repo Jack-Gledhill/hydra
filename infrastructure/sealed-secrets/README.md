@@ -9,7 +9,11 @@ This server is exposed via [Traefik](https://traefik.io) to https://hydra.starsy
 
 Thus, you can seal a secret simply by running:
 ```bash
-kubeseal --cert https://hydra.starsystem.dev/v1/cert.pem -f secret.yml -w sealed-secret.yml
+kubeseal --cert https://sealed-secrets.hydra.starsystem.dev/v1/cert.pem -f secret.yml -w sealed-secret.yml
 ```
 
 **Note:** you're likely to get an SSL warning from this URL. That's because [Cert Manager](https://cert-manager.io) relies on Sealed Secrets to issue certificates, so this route does not have a certificate.
+Instead, you can access the Service via it's virtual IP:
+```bash
+kubeseal --cert http://10.1.16.2:8080/v1/cert.pem -f secret.yml -w sealed-secret.yml
+```
