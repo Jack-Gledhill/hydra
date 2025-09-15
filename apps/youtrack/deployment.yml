@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: youtrack
-          image: youtrack:2025.2.92387
+          image: jetbrains/youtrack:2025.2.94372
           ports:
             - name: http
               containerPort: 8080
