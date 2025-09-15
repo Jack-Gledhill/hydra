@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtrack
+  namespace: youtrack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: youtrack
+  template:
+    metadata:
+      labels:
+        app: youtrack
+    spec:
+      containers:
+        - name: youtrack
+          image: youtrack:2025.2.92387
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: backups
+              mountPath: /opt/youtrack/backups
+            - name: config
+              mountPath: /opt/youtrack/config
+            - name: data
+              mountPath: /opt/youtrack/data
+      volumes:
+        - name: backups
+          persistentVolumeClaim:
+            claimName: youtrack-backups
+        - name: config
+          persistentVolumeClaim:
+            claimName: youtrack-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: youtrack-data
