@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: adguard
-  namespace: adguard
 spec:
   selector:
     matchLabels:
