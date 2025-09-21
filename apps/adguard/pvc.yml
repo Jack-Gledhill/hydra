@@ -4,7 +4,7 @@ metadata:
   name: adguard-config
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: nfs
   resources:
     requests:
