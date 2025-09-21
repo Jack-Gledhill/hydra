@@ -29,6 +29,8 @@ spec:
               mountPath: /opt/youtrack/conf
             - name: data
               mountPath: /opt/youtrack/data
+            - name: logs
+              mountPath: /opt/youtrack/logs
       volumes:
         - name: backups
           persistentVolumeClaim:
@@ -39,3 +41,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: youtrack-data
+        - name: logs
+          emptyDir:
+            sizeLimit: 100Mi

@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: longhorn
+  storageClassName: nfs
   resources:
     requests:
       storage: 2Gi # Approx 1Gi per 5000 issues, see: https://youtrack-support.jetbrains.com/hc/en-us/articles/206546119-Hardware-requirements-for-YouTrack
