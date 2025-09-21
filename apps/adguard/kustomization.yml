@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: apps
 resources:
   - pvc.yml
-  - daemonset.yml
+  - deployment.yml
   - service-dns.yml
   - service-web.yml
   - ingress.yml
