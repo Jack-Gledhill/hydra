@@ -5,6 +5,8 @@ metadata:
   annotations:
     metallb.io/loadBalancerIPs: 10.1.16.5
 spec:
+  selector:
+    app: adguard
   type: LoadBalancer
   ports:
     - name: dns
