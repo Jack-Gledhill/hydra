@@ -6,3 +6,4 @@ resources:
   - database-pvc.yml
   - database-credentials.yml
   - database.yml
+  - database-service.yml
