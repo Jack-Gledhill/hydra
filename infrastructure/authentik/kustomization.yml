@@ -3,7 +3,8 @@ kind: Kustomization
 namespace: authentik
 resources:
   - namespace.yml
-  - database-pvc.yml
+  - database-pvc-data.yml
+  - database-pvc-wal.yml
   - database-credentials.yml
   - database.yml
   - database-service.yml

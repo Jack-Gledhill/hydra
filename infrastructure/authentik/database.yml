@@ -40,13 +40,20 @@ spec:
             # See: https://hub.docker.com/_/postgres
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_INITDB_WALDIR
+              value: /var/lib/postgresql/wal
           ports:
             - containerPort: 5432
               name: postgres
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
+            - name: wal
+              mountPath: /var/lib/postgresql/wal
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: authentik-postgres-data
+        - name: wal
+          persistentVolumeClaim:
+            claimName: authentik-postgres-wal
