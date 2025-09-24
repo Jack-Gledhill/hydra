@@ -27,7 +27,7 @@ spec:
               name: redis
           volumeMounts:
             - name: config
-              mountPath: /etc/redis
+              mountPath: /etc/redis/redis.conf
               subPath: redis.conf
               readOnly: true
       volumes:
