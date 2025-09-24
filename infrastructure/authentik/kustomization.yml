@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: authentik
 resources:
   - namespace.yml
-  - pg-cluster.yml
-  - pg-database.yml
+  - database-pvc.yml
+  - database-credentials.yml
+  - database.yml
