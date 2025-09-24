@@ -22,8 +22,8 @@ spec:
           args:
             - server
           securityContext:
-            runAsUser: 1000
-            runAsGroup: 1000
+            runAsUser: 0
+            runAsGroup: 0
           env:
             - name: AUTHENTIK_LISTEN__HTTP
               value: "0.0.0.0:80"
