@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: authentik-redis-config
+  namespace: authentik
+spec:
+  encryptedData:
+    redis.conf: AgAdnYuCAnsLDEVI9T928h7SY5rt65G/ZrkXsvlEOnj3pv8qpJ9vbIXmpX+CYlbMKV0YP59GyHMFut26sbyopjGrc6Pou5wpfazT75wl/Zo+bYa5kqlS0E9vuYykuVBaIDrXTzds8TWjrjZ7vUPbqJfKWr10RRYnPd/2+1kWsT1i+KFLr0DMoym/haC1e0+MMsZ21+mtcIucKxg2WxSrx6epjWV+19BYWsgKCUaf68aunC2FI29kXUWS8ymHKgFU36N+x2SSTyI6SKwrJ4Rw/1u5O/FxJIvCjWv8Zy43Sywtm5ajJpy8+lxKI5F6e2sef+m/qF6ntc3dptQMBQ6fVZAQ43YYemrQJqAy9mo8yw+9ueOxb/6wCofFfdcCfeWwwLPCU6e4/d7AoLgtvBl+yz6AJO5lbAXr7nohmOr5JLJe7NlUchHB9x25NBmiakCAcsjl5/7YtL5lr77AxZj4seWcOM3EtuAjwML565EKTBY5RiEbRHHYYzHwEXjqlNXN3k7KdtC6d5rAkvRt89GoVJV1RrNrricDynyx1SCQkYowccrriCDfRDFLjdRdDRWaRnJIgpliYWRWv4/Auelg5SfNl/ElTOefiR61DyfZs+N/l4VC7orpkYtDWEqttvV4R3udag9/vnF9B8NWof/lH1I9M4xZilqFH1+e7fMM1SjIJ0vrEgn00jhvwTNZoxAAlMDmUaEgZTbAACJD6FwXkipdMQdDxqFo7+7K+qux7es+JJiNpPefbEA1LOONHQ==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: authentik-redis-config
+      namespace: authentik

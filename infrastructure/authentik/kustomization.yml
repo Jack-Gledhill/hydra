@@ -8,3 +8,6 @@ resources:
   - database-credentials.yml
   - database.yml
   - database-service.yml
+  - redis-config.yml
+  - redis.yml
+  - redis-service.yml
