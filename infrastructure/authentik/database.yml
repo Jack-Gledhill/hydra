@@ -16,8 +16,6 @@ spec:
         component: postgres
     spec:
       priorityClassName: system-cluster-critical
-      securityContext:
-        fsGroup: 568
       containers:
         - name: postgres
           image: postgres:17
