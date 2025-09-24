@@ -1,0 +1,73 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: authentik-server
+  namespace: authentik
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentik
+      component: server
+  template:
+    metadata:
+      labels:
+        app: authentik
+        component: server
+    spec:
+      priorityClassName: system-cluster-critical
+      containers:
+        - name: server
+          image: ghcr.io/goauthentik/server:2025.8.3
+          command:
+            - server
+          env:
+            - name: AUTHENTIK_LISTEN__HTTP
+              value: "0.0.0.0:80"
+            - name: AUTHENTIK_LISTEN__METRICS
+              value: "0.0.0.0:81"
+            - name: AUTHENTIK_POSTGRESQL__HOST
+              value: authentik-postgres
+            - name: AUTHENTIK_POSTGRESQL__PORT
+              value: "5432"
+            - name: AUTHENTIK_POSTGRESQL__SSLMODE
+              value: disable
+            - name: AUTHENTIK_POSTGRESQL__NAME
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-postgres-credentials
+                  key: database
+            - name: AUTHENTIK_POSTGRESQL__USER
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-postgres-credentials
+                  key: username
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-postgres-credentials
+                  key: password
+            - name: AUTHENTIK_REDIS__HOST
+              value: authentik-redis
+            - name: AUTHENTIK_REDIS__PORT
+              value: "6379"
+            - name: AUTHENTIK_REDIS__PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-redis-config
+                  key: password
+          envFrom:
+            - secretRef:
+                name: authentik-config
+          ports:
+            - name: http
+              containerPort: 80
+            - name: metrics
+              containerPort: 81
+          volumeMounts:
+            - name: media
+              mountPath: /media
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: authentik-media

@@ -11,3 +11,10 @@ resources:
   - redis-config.yml
   - redis.yml
   - redis-service.yml
+  - authentik-config.yml
+  - authentik-pvc-media.yml
+  - server.yml
+  - server-service.yml
+  - server-ingress.yml
+  - worker.yml
+  - worker-service.yml
