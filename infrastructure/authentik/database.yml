@@ -19,6 +19,9 @@ spec:
       containers:
         - name: postgres
           image: postgres:17
+          securityContext:
+            runAsUser: 66534
+            runAsGroup: 66534
           env:
             - name: POSTGRES_USER
               valueFrom:
