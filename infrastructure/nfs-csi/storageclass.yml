@@ -10,6 +10,7 @@ mountOptions:
   - nfsvers=4.1
   - sync
   - hard
+  - no_root_squash
 parameters:
   server: sagittarius.starsystem.dev
   share: /mnt/storage-pool/hydra
