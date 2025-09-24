@@ -7,7 +7,7 @@ resources:
   - cluster-role.yml
   - cluster-role-binding.yml
   - crds.yml
-  - sealed.secret-basic-auth.yml
+  - basic-auth.yml
   - middleware-basic-auth.yml
   - middleware-cors.yml
   - daemonset.yml

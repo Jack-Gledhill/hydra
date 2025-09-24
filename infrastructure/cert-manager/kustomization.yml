@@ -4,7 +4,7 @@ kind: Kustomization
 # This causes cert-manager to fail completely due to missing permissions regarding leader election.
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.18.2/cert-manager.yaml
-  - sealed.secret-acme-dns.yml
+  - acme-dns.yml
   - cluster-issuer.yml
 
 patches:
