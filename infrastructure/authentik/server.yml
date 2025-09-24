@@ -21,6 +21,9 @@ spec:
           image: ghcr.io/goauthentik/server:2025.8.3
           args:
             - server
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
           env:
             - name: AUTHENTIK_LISTEN__HTTP
               value: "0.0.0.0:80"
