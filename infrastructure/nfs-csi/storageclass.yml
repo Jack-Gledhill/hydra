@@ -14,3 +14,4 @@ parameters:
   server: sagittarius.starsystem.dev
   share: /mnt/storage-pool/hydra
   onDelete: delete
+  mountPermissions: "0777"
