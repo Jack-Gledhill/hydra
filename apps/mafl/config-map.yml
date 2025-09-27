@@ -182,3 +182,12 @@ data:
             color: "#22a364"
           status:
             enabled: true
+      Tools:
+        - title: Random Passwords
+          description: Generate 5 random 32-char passwords
+          link: https://www.random.org/passwords/?num=5&len=32&format=html&rnd=new
+          icon:
+            name: mdi:secure
+            wrap: true
+          status:
+            enabled: true
