@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: lldap
+  namespace: lldap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lldap
+      component: server
+  template:
+    metadata:
+      labels:
+        app: lldap
+        component: server
+    spec:
+      priorityClassName: system-cluster-critical
+      containers:
+        - name: lldap
+          image: lldap/lldap:stable
+          envFrom:
+            - secretRef:
+                name: lldap-env
+          ports:
+            - name: http
+              containerPort: 80
+            - name: ldap
+              containerPort: 3890
+            - name: ldaps
+              containerPort: 6360
