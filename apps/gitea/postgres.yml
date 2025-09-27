@@ -1,0 +1,58 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: postgres
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: gitea
+        component: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:17
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-postgres-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-postgres-credentials
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: gitea-postgres-credentials
+                  key: database
+            # According to the image documentation, PGDATA must be a subdirectory of /var/lib/postgresql/data
+            # on filesystems that can't be chowned to the postgres user (e.g. NFS)
+            # See: https://hub.docker.com/_/postgres
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_INITDB_WALDIR
+              value: /var/lib/postgresql/wal
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: wal
+              mountPath: /var/lib/postgresql/wal
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: gitea-postgres-data
+        - name: wal
+          persistentVolumeClaim:
+            claimName: gitea-postgres-wal
