@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: lldap
+                name: lldap-web
                 port:
                   number: 80
