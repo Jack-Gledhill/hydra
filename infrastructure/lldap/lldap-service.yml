@@ -11,7 +11,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 17170
     - name: ldap
       port: 389
       targetPort: 3890

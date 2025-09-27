@@ -24,7 +24,7 @@ spec:
                 name: lldap-env
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 17170
             - name: ldap
               containerPort: 3890
             - name: ldaps
