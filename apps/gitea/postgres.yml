@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: postgres
+  name: gitea-postgres
   namespace: apps
 spec:
   replicas: 1
