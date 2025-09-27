@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lldap
+  name: lldap-web
   namespace: lldap
 spec:
   selector:
@@ -12,9 +12,3 @@ spec:
     - name: http
       port: 80
       targetPort: 17170
-    - name: ldap
-      port: 389
-      targetPort: 3890
-    - name: ldaps
-      port: 636
-      targetPort: 6360

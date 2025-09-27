@@ -10,5 +10,6 @@ resources:
   - postgres-service.yml
   - lldap-env.yml
   - lldap.yml
-  - lldap-service.yml
+  - lldap-service-ldap.yml
+  - lldap-service-web.yml
   - lldap-ingress.yml
