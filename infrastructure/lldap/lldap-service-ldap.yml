@@ -4,7 +4,7 @@ metadata:
   name: lldap-ldap
   namespace: lldap
   annotations:
-    metallb.io/loadBalancerIPs: 10.1.16.5
+    metallb.io/loadBalancerIPs: 10.1.16.6
 spec:
   selector:
     app: lldap
