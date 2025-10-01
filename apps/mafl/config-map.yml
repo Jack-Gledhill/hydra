@@ -50,6 +50,15 @@ data:
             wrap: true
           status:
             enabled: true
+        - title: YouTrack
+          description: Project manager and todo list
+          link: https://youtrack.starsystem.dev/agiles/189-14/current
+          icon:
+            name: logos:youtrack
+            wrap: true
+            color: "#ff6f00"
+          status:
+            enabled: true
       University:
         - title: Blackboard
           description: Virtual Learning Environment
@@ -126,6 +135,28 @@ data:
           status:
             enabled: true
       Societies:
+        - title: NoDDSoc Verification Form
+          description: Form responses for member verification
+          link: https://docs.google.com/spreadsheets/d/1IahlyPkXOxhex2S-NMBtIB8KL_6nUjEm4niIvGLY5ts/edit?usp=sharing
+          icon:
+            name: mdi:google-spreadsheet
+            wrap: true
+            color: "#22a364"
+          status:
+            enabled: true
+          tags:
+            - NoDDSoc
+        - title: ShefESH Session Guide
+          description: Session tracker spreadsheet
+          link: https://docs.google.com/spreadsheets/d/1LQSoXxezew2GnaIvHUch-pusOo0_3ApNnFt2KuCVXzQ/edit?usp=sharing
+          icon:
+            name: mdi:google-spreadsheet
+            wrap: true
+            color: "#22a364"
+          status:
+            enabled: true
+          tags:
+            - ShefESH
         - title: SU Dashboard
           description: Society dashboards
           link: https://su.sheffield.ac.uk/auth/dashboard
@@ -173,13 +204,22 @@ data:
             color: "#d50b2d"
           status:
             enabled: true
-        - title: House Spreadsheet
+      Home:
+        - title: Bills Spreadsheet
           description: Bills and expenses tracker
           link: https://docs.google.com/spreadsheets/d/1BrB9kMomzi2pwmT4mPRdmRQoMSzJCzJX8QjCZGWuSNU/edit?usp=sharing
           icon:
             name: mdi:google-spreadsheet
             wrap: true
             color: "#22a364"
+          status:
+            enabled: true
+        - title: Home Router
+          description: Router management for home network
+          link: http://192.168.0.1
+          icon:
+            name: material-symbols:router
+            wrap: true
           status:
             enabled: true
       Tools:
