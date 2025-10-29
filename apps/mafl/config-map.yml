@@ -59,6 +59,15 @@ data:
             color: "#ff6f00"
           status:
             enabled: true
+      Modules:
+        - title: COM2008 Project Repo
+          description: GitHub repository for the group project
+          link: https://github.com/tuos-dcs/team-project-team-05
+          icon:
+            name: mdi:github
+            wrap: true
+          status:
+            enabled: true
       University:
         - title: Blackboard
           description: Virtual Learning Environment
