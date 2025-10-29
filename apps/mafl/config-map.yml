@@ -101,6 +101,14 @@ data:
             wrap: true
           status:
             enabled: true
+        - title: SCS Student Handbook
+          description: Undergrad handbook for CompSci students
+          link: https://students.sheffield.ac.uk/cs
+          icon:
+            url: https://assets.jackgledhill.com/img/uos_circle.webp
+            wrap: true
+          status:
+            enabled: true
       Work:
         - title: Asana
           description: Project and task manager
