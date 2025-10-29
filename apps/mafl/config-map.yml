@@ -68,6 +68,15 @@ data:
             wrap: true
           status:
             enabled: true
+        - title: ECF Form 25/26
+          description: Extenuating Circumstances request form for 25/26
+          link: https://docs.google.com/forms/d/e/1FAIpQLSfX_-PkxcCgpKN5qfmmtAphgTRhQRTuSnJh_oSP7-OoDbg7cQ/viewform
+          icon:
+            name: simple-icons:googleforms
+            wrap: true
+            color: #7248b9
+          status:
+            enabled: true
         - title: GitLab
           description: SCS Git server
           link: https://git.shefcompsci.org.uk
