@@ -83,7 +83,7 @@ data:
           icon:
             name: simple-icons:googleforms
             wrap: true
-            color: #7248b9
+            color: "#7248b9"
           status:
             enabled: true
         - title: GitLab
