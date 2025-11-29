@@ -6,6 +6,7 @@ metadata:
 data:
   web.yml: |-
     basic_auth_users:
+      admin: "$2b$12$kFvyh.RBTtXoTkLUvbMLauXGFZld10Qys38EtUWeRaIZj2e8jNF1C"
       grafana: "$2b$12$HmsdyuPPWHaBB3kEbZ.nDeHidPPrC34zPzVD4qxccU5.bro6JW6he"
   # See this as a guide: https://prometheus.io/docs/prometheus/latest/configuration/configuration/
   prometheus.yml: |-
