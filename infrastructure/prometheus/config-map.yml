@@ -11,7 +11,7 @@ data:
   # See this as a guide: https://prometheus.io/docs/prometheus/latest/configuration/configuration/
   prometheus.yml: |-
     global:
-      scrape_interval: 1m
+      scrape_interval: 10s
       scrape_timeout: 10s
 
     scrape_configs:
