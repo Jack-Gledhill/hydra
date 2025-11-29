@@ -3,6 +3,19 @@
 Hydra is Constellation's resident Kubernetes cluster. 
 It runs the majority of Constellation's software stack, acting as the general compute resource for the system.
 
+## Startup Order
+
+1. MetalLB
+2. NFS Provisioner
+3. Reloader
+4. Sealed Secrets
+5. Cert Manager
+6. Traefik
+7. Local Path Provisioner
+8. CNPG Operator
+9. Authentik
+10. Applications
+
 ## Infrastructure
 
 These deployments are critical to the cluster's operation. 

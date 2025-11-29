@@ -4,10 +4,10 @@ metadata:
   name: traefik-dashboard
   namespace: traefik
   annotations:
-    prometheus.starsystem.dev/scrape: "true"
-    prometheus.starsystem.dev/scheme: http
-    prometheus.starsystem.dev/path: /metrics
-    prometheus.starsystem.dev/port: "8080"
+    prometheus.io/scrape: "true"
+    prometheus.io/scheme: http
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
     metallb.io/loadBalancerIPs: 10.1.16.4
 spec:
   selector:

@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: prometheus-system
+data:
+  # See this as a guide: https://prometheus.io/docs/prometheus/latest/configuration/configuration/
+  prometheus.yml: |-
+    global:
+      scrape_interval: 1m
+      scrape_timeout: 10s
+
+    scrape_config:
+      # Kubernetes Service Discovery
+      # Derived from this guide: https://se7entyse7en.dev/posts/how-to-set-up-kubernetes-service-discovery-in-prometheus/
+      - job_name: "kubernetes-services"
+
+        kubernetes_sd_configs:
+          - role: endpoints
+
+        relabel_configs:
+          # Only scrape if this annotation is true
+          # Annotation - prometheus.io/scrape: "true"
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+
+          # Set the scheme based on this annotation
+          # Annotation - prometheus.io/scheme: "http"
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+            action: replace
+            target_label: __scheme__
+            regex: (https?)
+          
+          # Set the metrics path based on this annotation
+          # Annotation - prometheus.io/path: "/metrics"
+          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+
+          # Set the URL based on this annotation
+          # Annotation - prometheus.io/port: "9191"
+          - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+            action: replace
+            target_label: __address__
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+
+          # Extract the namespace and add it as a label
+          - source_labels: [__meta_kubernetes_namespace]
+            action: replace
+            target_label: kubernetes_namespace
+
+          # Add the service's name as a new label
+          - source_labels: [__meta_kubernetes_service_name]
+            action: replace
+            target_label: kubernetes_service
+
+          # Add the pod's name as a new label
+          - source_labels: [__meta_kubernetes_pod_name]
+            action: replace
+            target_label: kubernetes_pod

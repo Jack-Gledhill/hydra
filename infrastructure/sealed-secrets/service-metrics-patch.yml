@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: sealed-secrets-controller-metrics
   annotations:
-    prometheus.starsystem.dev/scrape: "true"
-    prometheus.starsystem.dev/scheme: http
-    prometheus.starsystem.dev/path: /metrics
-    prometheus.starsystem.dev/port: "8081"
+    prometheus.io/scrape: "true"
+    prometheus.io/scheme: http
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8081"
