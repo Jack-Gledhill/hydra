@@ -4,6 +4,9 @@ metadata:
   name: prometheus-config
   namespace: prometheus-system
 data:
+  web.yml: |-
+    basic_auth_users:
+      grafana: "$2b$12$HmsdyuPPWHaBB3kEbZ.nDeHidPPrC34zPzVD4qxccU5.bro6JW6he"
   # See this as a guide: https://prometheus.io/docs/prometheus/latest/configuration/configuration/
   prometheus.yml: |-
     global:
