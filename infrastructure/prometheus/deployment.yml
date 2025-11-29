@@ -16,6 +16,10 @@ spec:
         app: prometheus
     spec:
       serviceAccountName: prometheus-service-discovery
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
       containers:
         - name: prometheus
           image: prom/prometheus
