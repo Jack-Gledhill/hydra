@@ -69,4 +69,4 @@ data:
           # Add the pod's node name as a new label
           - source_labels: [__meta_kubernetes_pod_node_name]
             action: replace
-            target_label: kubernetes_name
+            target_label: kubernetes_node
