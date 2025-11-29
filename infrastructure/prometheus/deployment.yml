@@ -16,6 +16,8 @@ spec:
         app: prometheus
     spec:
       serviceAccountName: prometheus-service-discovery
+      priorityClassName: system-cluster-critical
+      # This is needed to ensure file permissions are correct
       securityContext:
         runAsUser: 568
         runAsGroup: 568
