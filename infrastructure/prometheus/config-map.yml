@@ -19,13 +19,27 @@ data:
       - job_name: "node-exporter"
         metrics_path: "/metrics"
 
-        static_config:
-          targets:
-            - http://alpha.hydra.starsystem.dev:9100
-            - http://bravo.hydra.starsystem.dev:9100
-            - http://charlie.hydra.starsystem.dev:9100
-            - http://delta.hydra.starsystem.dev:9100
-            - http://echo.hydra.starsystem.dev:9100
+        static_configs:
+          - targets:
+              - http://alpha.hydra.starsystem.dev:9100
+            labels:
+              - node: alpha
+          - targets:
+              - http://bravo.hydra.starsystem.dev:9100
+            labels:
+              - node: bravo
+          - targets:
+              - http://charlie.hydra.starsystem.dev:9100
+            labels:
+              - node: charlie
+          - targets:
+              - http://delta.hydra.starsystem.dev:9100
+            labels:
+              - node: delta
+          - targets:
+              - http://echo.hydra.starsystem.dev:9100
+            labels:
+              - node: echo
 
       # Kubernetes Service Discovery
       # Derived from this guide: https://se7entyse7en.dev/posts/how-to-set-up-kubernetes-service-discovery-in-prometheus/
