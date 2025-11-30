@@ -7,6 +7,8 @@ metadata:
     configmap.reloader.stakater.com/reload: "prometheus-config"
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: prometheus
