@@ -15,6 +15,22 @@ data:
       scrape_timeout: 10s
 
     scrape_configs:
+      # Node exporters
+      - job_name: "node-alpha"
+        metrics_path: http://alpha.hydra.starsystem.dev:9100/metrics
+
+      - job_name: "node-bravo"
+        metrics_path: http://bravo.hydra.starsystem.dev:9100/metrics
+
+      - job_name: "node-charlie"
+        metrics_path: http://charlie.hydra.starsystem.dev:9100/metrics
+
+      - job_name: "node-delta"
+        metrics_path: http://delta.hydra.starsystem.dev:9100/metrics
+
+      - job_name: "node-echo"
+        metrics_path: http://echo.hydra.starsystem.dev:9100/metrics
+
       # Kubernetes Service Discovery
       # Derived from this guide: https://se7entyse7en.dev/posts/how-to-set-up-kubernetes-service-discovery-in-prometheus/
       - job_name: "kubernetes-services"
