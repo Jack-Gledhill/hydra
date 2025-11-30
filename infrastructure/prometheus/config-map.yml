@@ -21,23 +21,23 @@ data:
 
         static_configs:
           - targets:
-              - alpha.hydra.starsystem.dev:9100
+              - 10.1.0.1:9100
             labels:
               node: alpha
           - targets:
-              - bravo.hydra.starsystem.dev:9100
+              - 10.1.0.2:9100
             labels:
               node: bravo
           - targets:
-              - charlie.hydra.starsystem.dev:9100
+              - 10.1.0.3:9100
             labels:
               node: charlie
           - targets:
-              - delta.hydra.starsystem.dev:9100
+              - 10.1.0.4:9100
             labels:
               node: delta
           - targets:
-              - echo.hydra.starsystem.dev:9100
+              - 10.1.0.5:9100
             labels:
               node: echo
 
