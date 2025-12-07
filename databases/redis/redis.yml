@@ -7,7 +7,7 @@ metadata:
     configmap.reloader.stakater.com/reload: "redis-config"
     secret.reloader.stakater.com/reload: "redis-credentials"
 spec:
-  replicas: 5
+  replicas: 6
   serviceName: redis
   selector:
     matchLabels:
@@ -19,7 +19,8 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
+          # Since we only have 5 k8s nodes but 6 redis nodes, we need to use preferred instead of required here
+          preferredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
                   - key: app
