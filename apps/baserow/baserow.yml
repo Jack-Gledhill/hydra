@@ -22,24 +22,15 @@ spec:
             - name: DISABLE_VOLUME_CHECK
               value: "yes"
             - name: DATABASE_HOST
-              value: baserow-postgres
+              value: postgresql-rw.postgresql-cluster
             - name: DATABASE_PORT
               value: "5432"
-            - name: DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: baserow-postgres-credentials
-                  key: database
-            - name: DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: baserow-postgres-credentials
-                  key: username
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: baserow-postgres-credentials
-                  key: password
+            - name: REDIS_HOST
+              value: redis.redis-cluster
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_PROTOCOL
+              value: redis
           envFrom:
             - secretRef:
                 name: baserow-env

@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: baserow-database
+  namespace: apps
+spec:
+  # See here for list of options: https://cloudnative-pg.io/documentation/current/cloudnative-pg.v1/#postgresql-cnpg-io-v1-DatabaseSpec
+  ensure: present # or absent
+  databaseReclaimPolicy: delete # or retain
+  name: baserow
+  owner: baserow
+  cluster:
+    name: postgresql
+    namespace: postgresql-cluster
