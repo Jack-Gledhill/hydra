@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: init-cluster-env
+  namespace: redis-cluster
+spec:
+  encryptedData:
+    AUTH: AgBd5N0Dioh2+wCvTC/9qHzZP6vwAvJsfmUwIelvufZsdx32V9+DvzXaUwOthu+a3Hd18xOzAkXtW2KS/4aInoeDdc0wvO1Z2yEyIbZOiVeOn+JpWeIA7zK0HEyFIyExzV0YPikxAYHxccyYw2Pa+hTlrQUzqNz2WcWICWp/6zNEnx13653A5Oa6ImK1giTic1vnllQ/9vv3LuYLWbOuGr1PUsgByukcuCon5sLV40H7dEJRhJ8X+sUkrCnfR2Hs3CGdxYeFPPVmGmKa6FsdNcNg8eGBE1xtmTBoNIFTxo+Hdhh4ay2C7e9ihi+PYXOTBWWpl+dNMh73yE7TsUMOrhyT3hU/AI40CjMterZG+mM/wquI2udV2uVo66RVzcoP2oDiI2PALmlxNazBhwGDc9n3dx3H8+2aR03ENysMKGcoExHs/NzwEmjwNBs2dMEEcLTRMAjq6HFR/QGvDOswCs2rAefGhbHkit+VIUqjarwi2lfSuckUD163y1TZUsRQQo5he7OL3kQRb48CcQWFLPieaAttDUvRdRGZXsTmfq/MwEkF2w/4QrekgMNbPMDcPm3FUlG0l0jhyjBXLECqJQasETOM6ciKa/ngRtrILQN01j0CUnLALrKBumKKaIVQx6IqgxuJAG14d6OdRtkCvQDqbQnKMeGnGdvcTRqEpnJXeRWXiyZO3Um0I61SkRR8+ihdxcgQVGNdaYKCSsmx2ZhbA9jivxqWrunMCXCR2QDmyWxO0AQTxA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: init-cluster-env
+      namespace: redis-cluster
