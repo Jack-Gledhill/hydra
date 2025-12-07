@@ -4,8 +4,7 @@ metadata:
   name: redis
   namespace: redis-cluster
   annotations:
-    configmap.reloader.stakater.com/reload: "redis-config"
-    secret.reloader.stakater.com/reload: "redis-credentials"
+    secret.reloader.stakater.com/reload: "redis-config,redis-credentials"
 spec:
   replicas: 6
   serviceName: redis
@@ -54,8 +53,8 @@ spec:
           secret:
             secretName: redis-credentials
         - name: config
-          configMap:
-            name: redis-config
+          secret:
+            secretName: redis-config
   volumeClaimTemplates:
     - metadata:
         name: data
