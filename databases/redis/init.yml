@@ -16,11 +16,11 @@ spec:
             - -c
             - |
               redis-cli --cluster create \
-                redis-0:6379 \
-                redis-1:6379 \
-                redis-2:6379 \
-                redis-3:6379 \
-                redis-4:6379 \
+                redis-0.redis:6379 \
+                redis-1.redis:6379 \
+                redis-2.redis:6379 \
+                redis-3.redis:6379 \
+                redis-4.redis:6379 \
                 --cluster-replicas 1 --cluster-yes -a ${AUTH}
           envFrom:
             - secretRef:
