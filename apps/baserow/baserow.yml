@@ -25,12 +25,6 @@ spec:
               value: postgresql-rw.postgresql-cluster
             - name: DATABASE_PORT
               value: "5432"
-            - name: REDIS_HOST
-              value: redis.redis-cluster
-            - name: REDIS_PORT
-              value: "6379"
-            - name: REDIS_PROTOCOL
-              value: redis
           envFrom:
             - secretRef:
                 name: baserow-env
