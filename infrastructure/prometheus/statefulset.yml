@@ -7,8 +7,6 @@ metadata:
     configmap.reloader.stakater.com/reload: "prometheus-config"
 spec:
   replicas: 5
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: prometheus
@@ -18,7 +16,7 @@ spec:
         app: prometheus
     spec:
       affinity:
-        podAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
