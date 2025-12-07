@@ -4,7 +4,7 @@ metadata:
   name: prometheus
   namespace: prometheus-system
   annotations:
-    metallb.io/loadBalancerIPs: 10.1.16.7
+    metallb.io/loadBalancerIPs: 10.1.16.8
 spec:
   selector:
     app: prometheus
