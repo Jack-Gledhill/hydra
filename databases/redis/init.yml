@@ -21,6 +21,7 @@ spec:
                 redis-2.redis:6379 \
                 redis-3.redis:6379 \
                 redis-4.redis:6379 \
+                redis-5.redis:6379 \
                 --cluster-replicas 1 --cluster-yes
           envFrom:
             - secretRef:
