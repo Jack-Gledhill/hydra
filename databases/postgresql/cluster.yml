@@ -1,0 +1,44 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql
+  namespace: postgresql-cluster
+spec:
+  # See here for list of options: https://cloudnative-pg.io/documentation/current/cloudnative-pg.v1/#postgresql-cnpg-io-v1-ClusterSpec
+  description: Constellation's primary High Availability PostgreSQL cluster.
+  priorityClassName: system-cluster-critical
+  instances: 5
+  managed:
+    roles:
+      - name: baserow
+        comment: Database and role for Baserow
+        login: true
+        inherit: true
+        connectionLimit: -1
+        superuser: false
+        inRoles: []
+        passwordSecret:
+          name: credentials-baserow
+        disablePassword: false
+        ensure: present
+  primaryUpdateStrategy: unsupervised
+  storage:
+    storageClass: local
+    size: 10Gi
+  walStorage:
+    storageClass: local
+    size: 1Gi
+  affinity:
+    enablePodAntiAffinity: true
+    podAntiAffinityType: required
+  # TODO
+#  backup:
+#    volumeSnapshot:
+#    target: prefer-standby # or primary
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
