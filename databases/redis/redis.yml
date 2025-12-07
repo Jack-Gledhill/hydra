@@ -21,13 +21,12 @@ spec:
         podAntiAffinity:
           # Since we only have 5 k8s nodes but 6 redis nodes, we need to use preferred instead of required here
           preferredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - redis
-              topologyKey: "kubernetes.io/hostname"
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: redis
+                topologyKey: "kubernetes.io/hostname"
       containers:
         - name: redis
           image: redis:7.2
