@@ -40,7 +40,7 @@ spec:
             - name: https
               containerPort: 443
           volumeMounts:
-            - name: baserow
+            - name: data
               mountPath: /baserow/data
       volumes:
         - name: data
