@@ -4,7 +4,7 @@ metadata:
   name: kube-state-metrics
   namespace: prometheus-system
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: kube-state-metrics
