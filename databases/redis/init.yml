@@ -15,13 +15,13 @@ spec:
             - sh
             - -c
             - |
-              redis-cli --cluster create \
+              redis-cli --user $(USERNAME) --pass $(PASSWORD) --cluster create \
                 redis-0.redis:6379 \
                 redis-1.redis:6379 \
                 redis-2.redis:6379 \
                 redis-3.redis:6379 \
                 redis-4.redis:6379 \
-                --cluster-replicas 1 --cluster-yes --user '${USERNAME}' --pass '${PASSWORD}'
+                --cluster-replicas 1 --cluster-yes
           envFrom:
             - secretRef:
                 name: init-cluster-env
