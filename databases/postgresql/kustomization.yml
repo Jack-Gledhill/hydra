@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: postgresql-cluster
 resources:
   - namespace.yml
-  - credentials-baserow.yml
-  - database-baserow.yml
   - cluster.yml
+  - credentials-nocodb.yml
+  - database-nocodb.yml
