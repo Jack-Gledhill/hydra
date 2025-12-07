@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: redis-exporter
   namespace: redis-cluster
+  annotations:
+    secret.reloader.stakater.com/reload: "redis-exporter-credentials"
 spec:
   replicas: 1
   selector:
