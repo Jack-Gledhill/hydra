@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: redis-cluster
 resources:
   - namespace.yml
-  - network-policy.yml
+#  - network-policy.yml
   - redis-config.yml
   - redis-credentials.yml
   - redis.yml
