@@ -49,7 +49,7 @@ spec:
       volumes:
         - name: acls
           secret:
-            name: redis-credentials
+            secretName: redis-credentials
         - name: config
           configMap:
             name: redis-config
