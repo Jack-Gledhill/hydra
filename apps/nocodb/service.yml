@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nocodb
+  namespace: apps
+spec:
+  selector:
+    app: nocodb
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
