@@ -8,12 +8,17 @@ spec:
     matchLabels:
       app: redis
   ingress:
-    - from: []
-#        - podSelector:
-#            matchLabels:
-#              app: my-app
+    # Allow Redis nodes to communicate with each other over the cluster bus
+    - from:
+        - podSelector:
+            matchLabels:
+              app: redis
+      ports:
+        - protocol: TCP
+          port: 16379
+    # Allow any pod to access the cluster over the client port
+    - from:
+        - podSelector: {}
       ports:
         - protocol: TCP
           port: 6379
-        - protocol: TCP
-          port: 16379
