@@ -45,6 +45,20 @@ data:
             labels:
               node: echo
               system: hydra
+    
+      # Redis Service Discovery
+    - job_name: 'redis-cluster'
+      http_sd_configs:
+        - url: http://redis-exporter.redis-cluster:9121/discover-cluster-nodes
+          refresh_interval: 10m
+      metrics_path: /scrape
+      relabel_configs:
+        - source_labels: [__address__]
+          target_label: __param_target
+        - source_labels: [__param_target]
+          target_label: instance
+        - target_label: __address__
+          replacement: redis-exporter.redis-cluster:9121
 
       # Kubernetes Service Discovery
       # Derived from this guide: https://se7entyse7en.dev/posts/how-to-set-up-kubernetes-service-discovery-in-prometheus/

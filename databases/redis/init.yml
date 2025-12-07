@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: init-cluster
+  namespace: redis-cluster
+spec:
+  template:
+    spec:
+      ttlSecondsAfterFinished: 60
+      restartPolicy: OnFailure
+      containers:
+        - name: init
+          image: redis:7.2
+          command:
+            - sh
+            - -c
+            - |
+              redis-cli --cluster create \
+                redis-0.redis-cluster:6379 \
+                redis-1.redis-cluster:6379 \
+                redis-2.redis-cluster:6379 \
+                redis-3.redis-cluster:6379 \
+                redis-4.redis-cluster:6379 \
+                --cluster-replicas 1 --cluster-yes -a ${AUTH}
+          envFrom:
+            - secretRef:
+                name: init-cluster-env

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: baserow
+  namespace: apps
+spec:
+  selector:
+    app: baserow
+    component: server
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443

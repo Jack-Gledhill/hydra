@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: redis-firewall
+  namespace: redis-cluster
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  ingress:
+    - from: []
+#        - podSelector:
+#            matchLabels:
+#              app: my-app
+      ports:
+        - protocol: TCP
+          port: 6379
+        - protocol: TCP
+          port: 16379

@@ -1,0 +1,67 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: baserow-postgres
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baserow
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: baserow
+        component: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:17
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: password
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: database
+            # According to the image documentation, PGDATA must be a subdirectory of /var/lib/postgresql/data
+            # on filesystems that can't be chowned to the postgres user (e.g. NFS)
+            # See: https://hub.docker.com/_/postgres
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_INITDB_WALDIR
+              value: /var/lib/postgresql/wal
+          ports:
+            - containerPort: 5432
+              name: postgres
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            initialDelaySeconds: 200
+            timeoutSeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+            - name: wal
+              mountPath: /var/lib/postgresql/wal
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: baserow-postgres-data
+        - name: wal
+          persistentVolumeClaim:
+            claimName: baserow-postgres-wal

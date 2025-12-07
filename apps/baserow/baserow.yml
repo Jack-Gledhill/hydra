@@ -1,0 +1,57 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: baserow
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baserow
+      component: server
+  template:
+    metadata:
+      labels:
+        app: baserow
+        component: server
+    spec:
+      containers:
+        - name: baserow
+          image: baserow/baserow:2.0.3
+          env:
+            - name: DISABLE_VOLUME_CHECK
+              value: "yes"
+            - name: DATABASE_HOST
+              value: baserow-postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: database
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: baserow-postgres-credentials
+                  key: password
+          envFrom:
+            - secretRef:
+                name: baserow-env
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+          volumeMounts:
+            - name: baserow
+              mountPath: /baserow/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: baserow-data
