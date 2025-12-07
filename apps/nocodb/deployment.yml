@@ -3,6 +3,8 @@ apiVersion: apps/v1
 metadata:
   name: nocodb
   namespace: apps
+  annotations:
+    secret.reloader.stakater.com/reload: "nocodb-env"
 spec:
   replicas: 1
   selector:
