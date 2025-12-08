@@ -10,15 +10,15 @@ spec:
   instances: 5
   managed:
     roles:
-      - name: nocodb
-        comment: Database and role for NocoDB
+      - name: baserow
+        comment: Database and role for Baserow
         login: true
         inherit: true
         connectionLimit: -1
         superuser: false
         inRoles: []
         passwordSecret:
-          name: credentials-nocodb
+          name: credentials-baserow
         disablePassword: false
         ensure: present
   primaryUpdateStrategy: unsupervised
