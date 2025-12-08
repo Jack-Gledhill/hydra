@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nocodb
+  name: baserow
   namespace: apps
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
@@ -9,16 +9,16 @@ metadata:
 spec:
   tls:
     - hosts:
-        - db.starsystem.dev
-      secretName: nocodb-tls
+        - baserow.starsystem.dev
+      secretName: baserow-tls
   rules:
-    - host: db.starsystem.dev
+    - host: baserow.starsystem.dev
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: nocodb
+                name: baserow
                 port:
-                  number: 8080
+                  number: 80
