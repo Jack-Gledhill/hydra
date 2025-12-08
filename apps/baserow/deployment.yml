@@ -4,7 +4,7 @@ metadata:
   name: baserow
   namespace: apps
   annotations:
-    secret.reloader.stakater.com/reload: "baserow-config"
+    secret.reloader.stakater.com/reload: "baserow-env"
 spec:
   replicas: 1
   selector:
