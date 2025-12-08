@@ -39,11 +39,11 @@ spec:
             - name: socket-dir
               mountPath: /csi
           resources:
-            limits:
-              memory: 100Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 100Mi
           securityContext:
             capabilities:
               drop:
@@ -67,11 +67,11 @@ spec:
             - name: registration-dir
               mountPath: /registration
           resources:
-            limits:
-              memory: 100Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 100Mi
           securityContext:
             capabilities:
               drop:
@@ -113,11 +113,11 @@ spec:
               mountPath: /var/lib/kubelet/pods
               mountPropagation: "Bidirectional"
           resources:
-            limits:
-              memory: 300Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 300Mi
       volumes:
         - name: socket-dir
           hostPath:

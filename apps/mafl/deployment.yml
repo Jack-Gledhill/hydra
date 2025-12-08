@@ -20,6 +20,12 @@ spec:
           ports:
             - name: http
               containerPort: 3000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              memory: 150Mi
           volumeMounts:
             - name: config
               mountPath: /app/data/config.yml

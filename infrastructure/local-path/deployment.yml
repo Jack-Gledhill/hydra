@@ -34,6 +34,12 @@ spec:
                   fieldPath: metadata.namespace
             - name: CONFIG_MOUNT_PATH
               value: /etc/config/
+          resources:
+            requests:
+              cpu: 50m
+              memory: 25Mi
+            limits:
+              memory: 100Mi
       volumes:
         - name: config-volume
           configMap:

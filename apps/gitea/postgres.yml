@@ -44,6 +44,12 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              memory: 150Mi
           livenessProbe:
             httpGet:
               path: /api/healthz

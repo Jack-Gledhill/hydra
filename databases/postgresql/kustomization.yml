@@ -4,5 +4,5 @@ namespace: postgresql-cluster
 resources:
   - namespace.yml
   - cluster.yml
-  - credentials-nocodb.yml
-  - database-nocodb.yml
+  - credentials-baserow.yml
+  - database-baserow.yml

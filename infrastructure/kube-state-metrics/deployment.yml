@@ -44,3 +44,9 @@ spec:
               port: telemetry
             initialDelaySeconds: 5
             timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 100m
+              memory: 250Mi
+            limits:
+              memory: 500Mi

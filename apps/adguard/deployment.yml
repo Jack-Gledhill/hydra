@@ -23,6 +23,12 @@ spec:
               protocol: UDP
             - containerPort: 3000
               name: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 50Mi
+            limits:
+              memory: 150Mi
           volumeMounts:
             - name: config
               mountPath: /opt/adguardhome/conf

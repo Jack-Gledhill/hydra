@@ -43,6 +43,12 @@ spec:
           envFrom:
             - secretRef:
                 name: gitea-env
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              memory: 500Mi
           ports:
             - name: http
               containerPort: 3000
