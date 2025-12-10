@@ -6,7 +6,7 @@ metadata:
   annotations:
     secret.reloader.stakater.com/reload: "baserow-env"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: baserow
@@ -43,10 +43,10 @@ spec:
                 name: baserow-env
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 150m
+              memory: 1000Mi
             limits:
-              memory: 1Gi
+              memory: 1500Mi
           readinessProbe:
             exec:
               command:
@@ -65,10 +65,10 @@ spec:
                 name: baserow-env
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 150m
+              memory: 1000Mi
             limits:
-              memory: 1Gi
+              memory: 1500Mi
           readinessProbe:
             exec:
               command:
@@ -84,10 +84,10 @@ spec:
             - "celery-beat"
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 50m
+              memory: 250Mi
             limits:
-              memory: 1Gi
+              memory: 500Mi
           envFrom:
             - secretRef:
                 name: baserow-env

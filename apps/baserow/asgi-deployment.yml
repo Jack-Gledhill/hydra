@@ -6,7 +6,7 @@ metadata:
   annotations:
     secret.reloader.stakater.com/reload: "baserow-env"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: baserow
@@ -48,9 +48,9 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 256Mi
+              memory: 1000Mi
             limits:
-              memory: 1Gi
+              memory: 1500Mi
           readinessProbe:
             exec:
               command:
