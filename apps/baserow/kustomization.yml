@@ -12,5 +12,4 @@ resources:
   - worker-deployment.yml
   - web-deployment.yml
   - web-service.yml
-  - service.yml
   - ingress.yml
