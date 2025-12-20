@@ -19,7 +19,8 @@ spec:
         - name: postgres
           image: postgres:17
           command:
-            - /usr/lib/postgresql/17/bin/pg_resetwal $PDATA
+            - /usr/lib/postgresql/17/bin/pg_resetwal
+            - $PDATA
           env:
             - name: POSTGRES_USER
               valueFrom:
