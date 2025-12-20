@@ -3,11 +3,6 @@ kind: Kustomization
 namespace: lldap
 resources:
   - namespace.yml
-  - postgres-pvc-data.yml
-  - postgres-pvc-wal.yml
-  - postgres-credentials.yml
-  - postgres.yml
-  - postgres-service.yml
   - lldap-env.yml
   - lldap.yml
   - lldap-service-ldap.yml
