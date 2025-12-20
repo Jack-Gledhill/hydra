@@ -22,9 +22,11 @@ spec:
           command:
             - gosu
             - postgres
-            - /usr/lib/postgresql/17/bin/pg_resetwal
-            - -f
-            - /var/lib/postgresql/data/pgdata
+            - rm
+            - postmaster.pid
+#            - /usr/lib/postgresql/17/bin/pg_resetwal
+#            - -f
+#            - /var/lib/postgresql/data/pgdata
           env:
             - name: POSTGRES_USER
               valueFrom:
