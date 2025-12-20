@@ -43,7 +43,7 @@ spec:
           name: credentials-lldap
         disablePassword: false
         ensure: present
-      - name: lldap
+      - name: keycloak
         comment: Database and role for Keycloak
         login: true
         inherit: true
