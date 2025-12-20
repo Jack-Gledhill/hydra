@@ -23,7 +23,7 @@ spec:
             - gosu
             - postgres
             - rm
-            - postmaster.pid
+            - /var/lib/postgresql/data/pgdata/postmaster.pid
 #            - /usr/lib/postgresql/17/bin/pg_resetwal
 #            - -f
 #            - /var/lib/postgresql/data/pgdata
