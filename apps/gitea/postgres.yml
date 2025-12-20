@@ -18,6 +18,8 @@ spec:
       containers:
         - name: postgres
           image: postgres:17
+          command:
+            - pg_resetwal $PGDATA
           env:
             - name: POSTGRES_USER
               valueFrom:
