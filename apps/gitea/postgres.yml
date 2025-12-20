@@ -19,6 +19,8 @@ spec:
         - name: postgres
           image: postgres:17
           command:
+            - gosu
+            - postgres
             - /usr/lib/postgresql/17/bin/pg_resetwal
             - $PDATA
           env:
