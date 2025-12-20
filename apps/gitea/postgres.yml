@@ -22,7 +22,7 @@ spec:
             - gosu
             - postgres
             - /usr/lib/postgresql/17/bin/pg_resetwal
-            - $PDATA
+            - $PGATA
           env:
             - name: POSTGRES_USER
               valueFrom:
