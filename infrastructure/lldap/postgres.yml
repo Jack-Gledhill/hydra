@@ -19,12 +19,6 @@ spec:
       containers:
         - name: postgres
           image: postgres:17
-          command:
-            - gosu
-            - postgres
-            - /usr/lib/postgresql/17/bin/pg_resetwal
-            - -f
-            - /var/lib/postgresql/data/pgdata
           env:
             - name: POSTGRES_USER
               valueFrom:
