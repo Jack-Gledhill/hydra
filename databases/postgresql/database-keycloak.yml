@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: database-keycloak
+  namespace: postgresql-cluster
+spec:
+  ensure: present # or absent
+  databaseReclaimPolicy: delete # or retain
+  name: keycloak
+  owner: keycloak
+  cluster:
+    name: postgresql

@@ -43,6 +43,17 @@ spec:
           name: credentials-lldap
         disablePassword: false
         ensure: present
+      - name: lldap
+        comment: Database and role for Keycloak
+        login: true
+        inherit: true
+        connectionLimit: -1
+        superuser: false
+        inRoles: [ ]
+        passwordSecret:
+          name: credentials-keycloak
+        disablePassword: false
+        ensure: present
   primaryUpdateStrategy: unsupervised
   storage:
     storageClass: local
