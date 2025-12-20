@@ -21,6 +21,28 @@ spec:
           name: credentials-baserow
         disablePassword: false
         ensure: present
+      - name: gitea
+        comment: Database and role for Gitea
+        login: true
+        inherit: true
+        connectionLimit: -1
+        superuser: false
+        inRoles: [ ]
+        passwordSecret:
+          name: credentials-gitea
+        disablePassword: false
+        ensure: present
+      - name: lldap
+        comment: Database and role for LLDAP
+        login: true
+        inherit: true
+        connectionLimit: -1
+        superuser: false
+        inRoles: [ ]
+        passwordSecret:
+          name: credentials-lldap
+        disablePassword: false
+        ensure: present
   primaryUpdateStrategy: unsupervised
   storage:
     storageClass: local

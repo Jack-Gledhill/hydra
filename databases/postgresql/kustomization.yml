@@ -5,4 +5,8 @@ resources:
   - namespace.yml
   - cluster.yml
   - credentials-baserow.yml
+  - credentials-gitea.yml
+  - credentials-lldap.yml
   - database-baserow.yml
+  - database-gitea.yml
+  - database-lldap.yml
