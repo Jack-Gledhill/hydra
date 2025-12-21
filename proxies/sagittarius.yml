@@ -5,7 +5,7 @@ metadata:
   namespace: traefik
 spec:
   type: ExternalName
-  externalName: sagittarius.starsystem.dev
+  externalName: 10.3.0.1
   ports:
     - name: opencloud
       port: 9200
