@@ -47,6 +47,7 @@ spec:
           args:
             - --providers.kubernetesingress # Becomes the cluster's Ingress controller
             - --providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik-proxy # Publishes Traefik's load balancer IP to Ingress objects, only a cosmetic thing
+            - --providers.kubernetesingress.allowExternalNameServices=true # Enable externalName services for external proxying
             - --providers.kubernetescrd # Enables the use of CRDs for configuration
             - --ping # Enables the ping endpoint for healthchecking Traefik
             - --global.sendanonymoususage=false
