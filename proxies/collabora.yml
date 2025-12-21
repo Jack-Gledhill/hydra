@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - collab.cloud.starsystem.dev
+        - office.starsystem.dev
       secretName: collabora-tls
   rules:
-    - host: collab.cloud.starsystem.dev
+    - host: office.starsystem.dev
       http:
         paths:
           - path: /
