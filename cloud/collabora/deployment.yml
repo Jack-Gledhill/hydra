@@ -1,0 +1,78 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: collabora
+  namespace: cloud
+  annotations:
+    secret.reloader.stakater.com/reload: "collabora-credentials"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: collabora
+  template:
+    metadata:
+      labels:
+        app: collabora
+    spec:
+      containers:
+        - name: collabora
+          image: collabora/code:25.04.8.1.1
+          command:
+            - coolconfig generate-proof-key && /start-collabora-online.sh
+          envFrom:
+            - secretRef:
+                name: collabora-credentials
+          env:
+            - name: DONT_GEN_SSL_CERT
+              value: "YES"
+            - name: aliasgroup1
+              value: https://wopi.cloud.starsystem.dev
+            - name: server_name
+              value: collab.cloud.starsystem.dev
+            - name: extra_params
+              value: |
+                --o:ssl.enable=false \
+                --o:ssl.termination=true \
+                --o:welcome.enable=false \
+                --o:net.frame_ancestors=cloud.starsystem.dev \
+                --o:net.lok_allow.host[14]=cloud.starsystem.dev \
+                --o:logging.disable_server_audit=true \
+                --o:home_mode.enable=true \
+                --o:num_prespawn_children=2 \
+                --o:per_document.max_concurrency=4 \
+                --o:overwrite_mode=false \
+                --o:user_interface.mode=tabbed \
+          ports:
+            - name: http
+              containerPort: 9980
+          securityContext:
+            capabilities:
+              add:
+                - MKNOD
+          readinessProbe:
+            httpGet:
+              path: /hosting/discovery
+              port: 9980
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 5
+          # TODO
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              memory: 2Gi
+          volumeMounts:
+            - name: fonts
+              mountPath: /usr/share/fonts/truetype
+              readOnly: true
+            - name: fonts
+              mountPath: /opt/cool/systemplate/usr/share/fonts/truetype/more
+              readOnly: true
+      volumes:
+        - name: fonts
+          hostPath:
+            path: /usr/share/fonts/truetype
+            type: Directory

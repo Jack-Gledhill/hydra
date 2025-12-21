@@ -1,24 +1,24 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: keycloak
-  namespace: users
+  name: opencloud
+  namespace: cloud
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   tls:
     - hosts:
-        - keycloak.starsystem.dev
-      secretName: keycloak-tls
+        - cloud.starsystem.dev
+      secretName: opencloud-tls
   rules:
-    - host: keycloak.starsystem.dev
+    - host: cloud.starsystem.dev
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: keycloak
+                name: opencloud
                 port:
-                  number: 8080
+                  number: 9200

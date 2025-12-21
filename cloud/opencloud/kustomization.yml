@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: cloud
+resources:
+  - configmap.yml
+  - env.yml
+  - pvc-apps.yml
+  - pvc-config.yml
+  - pvc-data.yml
+  - deployment.yml
+  - service.yml
+  - ingress.yml

@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wopi
+  namespace: cloud
+  annotations:
+    secret.reloader.stakater.com/reload: "wopi-env"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opencloud
+      component: wopi
+  template:
+    metadata:
+      labels:
+        app: opencloud
+        component: wopi
+    spec:
+      containers:
+        - name: opencloud
+          image: opencloudeu/opencloud-rolling:latest
+          command:
+            - opencloud
+            - collaboration
+            - server
+          envFrom:
+            - secretRef:
+                name: opencloud-env
+          # TODO
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+            limits:
+              memory: 512Mi
+          ports:
+            - name: http
+              containerPort: 9300
+            - name: grpc
+              containerPort: 9301
+            - name: metrics
+              containerPort: 9302
