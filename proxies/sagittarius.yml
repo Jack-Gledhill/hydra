@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sagittarius
+  namespace: traefik
+spec:
+  type: ExternalName
+  externalName: sagittarius.starsystem.dev
+  ports:
+    - name: opencloud
+      port: 9200
+      targetPort: 9200
+    - name: collabora
+      port: 9980
+      targetPort: 9980
