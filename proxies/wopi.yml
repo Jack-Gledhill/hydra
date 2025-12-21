@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - wopi.starsystem.dev
-      secretName: collabora-tls
+      secretName: wopi-tls
   rules:
     - host: wopi.starsystem.dev
       http:
