@@ -4,3 +4,4 @@ resources:
   - sagittarius.yml
   - collabora.yml
   - opencloud.yml
+  - wopi.yml
