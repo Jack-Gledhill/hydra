@@ -7,8 +7,6 @@ resources:
   - credentials-baserow.yml
   - credentials-gitea.yml
   - credentials-lldap.yml
-  - credentials-keycloak.yml
   - database-baserow.yml
   - database-gitea.yml
   - database-lldap.yml
-  - database-keycloak.yml
