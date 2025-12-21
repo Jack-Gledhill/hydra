@@ -10,6 +10,9 @@ spec:
     - name: opencloud
       port: 9200
       targetPort: 9200
+    - name: wopi
+      port: 9300
+      targetPort: 9300
     - name: collabora
       port: 9980
       targetPort: 9980
