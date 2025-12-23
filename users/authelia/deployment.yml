@@ -21,8 +21,8 @@ spec:
         - name: authelia
           image: authelia/authelia:latest
           args:
-            - --config /config/configuration.yml
-            - --config.experimental.filters template
+            - --config=/config/configuration.yml
+            - --config.experimental.filters=template
           env:
             - name: TZ
               value: Europe/London
