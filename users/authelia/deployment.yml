@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: authelia
+  namespace: users
+  annotations:
+    secret.reloader.stakater.com/reload: "authelia-config,authelia-keys"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authelia
+  template:
+    metadata:
+      labels:
+        app: authelia
+    spec:
+      enableServiceLinks: false # Required as per https://www.authelia.com/integration/kubernetes/introduction/
+      priorityClassName: system-cluster-critical
+      containers:
+        - name: authelia
+          image: authelia/authelia:latest
+          args:
+            - --config /config/configuration.yml
+            - --config.experimental.filters template
+          env:
+            - name: TZ
+              value: Europe/London
+          ports:
+            - name: http
+              containerPort: 9091
+            - name: metrics
+              containerPort: 9959
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              memory: 500Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: keys
+              mountPath: /keys
+      volumes:
+        - name: config
+          secret:
+            secretName: authelia-config
+        - name: keys
+          secret:
+            secretName: authelia-keys
