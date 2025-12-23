@@ -42,11 +42,9 @@ spec:
             - name: config
               mountPath: /config/configuration.yaml
               subPath: configuration.yaml
-              readOnly: false
             - name: keys
               mountPath: /keys/rsa.key
               subPath: rsa.key
-              readOnly: true
       volumes:
         - name: config
           secret:
