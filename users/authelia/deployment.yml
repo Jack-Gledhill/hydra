@@ -26,7 +26,7 @@ spec:
             - name: X_AUTHELIA_CONFIG_FILTERS
               value: template
             - name: X_AUTHELIA_CONFIG
-              value: /config/configuration.yml
+              value: /config/configuration.yaml
           ports:
             - name: http
               containerPort: 9091
@@ -40,13 +40,23 @@ spec:
               memory: 500Mi
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /config/configuration.yaml
+              subPath: configuration.yaml
+              readOnly: true
             - name: keys
               mountPath: /keys
+              subPath: rsa.key
+              readOnly: true
       volumes:
         - name: config
           secret:
             secretName: authelia-config
+            items:
+              - key: configuration.yaml
+                path: configuration.yaml
         - name: keys
           secret:
             secretName: authelia-keys
+            items:
+              - key: rsa.key
+                path: rsa.key
