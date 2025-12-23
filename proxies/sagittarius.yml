@@ -10,6 +10,9 @@ spec:
     - name: truenas
       port: 80
       targetPort: 80
+    - name: immich
+      port: 2283
+      targetPort: 2283
     - name: portainer
       port: 9000
       targetPort: 9000

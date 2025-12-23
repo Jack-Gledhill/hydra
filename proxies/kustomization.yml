@@ -7,3 +7,4 @@ resources:
   - collabora.yml
   - opencloud.yml
   - wopi.yml
+  - immich.yml
