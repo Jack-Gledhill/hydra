@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: open-webui
+  namespace: apps
+  annotations:
+    secret.reloader.stakater.com/reload: "open-webui-env"
 spec:
   replicas: 1
   selector:
@@ -15,9 +18,9 @@ spec:
       containers:
         - name: open-webui
           image: ghcr.io/open-webui/open-webui:main
-          env:
-            - name: OLLAMA_BASE_URL
-              value: "http://sagittarius.starsystem.dev:11434"
+          envFrom:
+            - secretRef:
+                name: open-webui-env
           resources:
             requests:
               cpu: 500m
