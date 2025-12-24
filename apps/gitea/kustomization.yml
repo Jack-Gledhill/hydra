@@ -3,8 +3,7 @@ kind: Kustomization
 namespace: apps
 resources:
   - env.yml
-  - pvc-config.yml
-  - pvc-data.yml
+  - pvc.yml
   - deployment.yml
   - service-ssh.yml
   - service-web.yml

@@ -35,14 +35,9 @@ spec:
             - name: ssh
               containerPort: 2222
           volumeMounts:
-            - name: config
-              mountPath: /etc/gitea
             - name: data
               mountPath: /data
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: gitea-config
         - name: data
           persistentVolumeClaim:
               claimName: gitea-data

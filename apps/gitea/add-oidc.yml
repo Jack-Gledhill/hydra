@@ -14,8 +14,8 @@ spec:
             - sh
             - -c
             - |
-              gitea migrate && \
-              gitea admin auth add-oauth \
+              gitea migrate -c /data/gitea/conf/app.ini && \
+              gitea admin auth add-oauth -c /data/gitea/conf/app.ini \
                 --provider=openidConnect \
                 --name=Authelia \
                 --key=$(CLIENT_ID) \
@@ -31,14 +31,9 @@ spec:
             - secretRef:
                 name: gitea-add-oidc-env
           volumeMounts:
-            - name: config
-              mountPath: /etc/gitea
             - name: data
               mountPath: /data
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: gitea-config
         - name: data
           persistentVolumeClaim:
             claimName: gitea-data
