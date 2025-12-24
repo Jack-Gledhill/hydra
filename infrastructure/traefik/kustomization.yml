@@ -9,6 +9,8 @@ resources:
   - basic-auth.yml
   - middleware-basic-auth.yml
   - middleware-cors.yml
+  - middleware-vpn-only.yml
+  - middleware-forward-auth.yml
   - daemonset.yml
   - service-dashboard.yml
   - service-proxy.yml
