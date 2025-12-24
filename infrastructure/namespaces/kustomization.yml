@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - users.yml
   - apps.yml
-  - cloud.yml
+  - media.yml
