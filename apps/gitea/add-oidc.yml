@@ -9,7 +9,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: gitea
-          image: docker.io/gitea/gitea:latest
+          image: docker.io/gitea/gitea:latest-rootless
           command:
             - sh
             - -c
