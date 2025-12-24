@@ -19,7 +19,7 @@ spec:
                 --provider=openidConnect \
                 --name=Authelia \
                 --key=$(CLIENT_ID) \
-                --secret=$(CLIENT_SECRET)
+                --secret=$(CLIENT_SECRET) \
                 --auto-discover-url=$(ISSUER_URL)/.well-known/openid-configuration \
                 --scopes="openid email profile groups" \
                 --group-claim-name=groups \
@@ -30,3 +30,15 @@ spec:
           envFrom:
             - secretRef:
                 name: gitea-add-oidc-env
+          volumeMounts:
+            - name: config
+              mountPath: /etc/gitea
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: gitea-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: gitea-data
