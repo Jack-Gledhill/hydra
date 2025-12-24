@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - home.jackgledhill.com
+        - mafl.starsystem.dev
       secretName: mafl-tls
   rules:
-    - host: home.jackgledhill.com
+    - host: mafl.starsystem.dev
       http:
         paths:
           - path: /
