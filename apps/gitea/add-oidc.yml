@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitea-add-oidc
+  namespace: apps
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: gitea
+          image: docker.io/gitea/gitea:latest
+          command:
+            - sh
+            - -c
+            - |
+              gitea migrate && \
+              gitea admin auth add-oauth \
+                --provider=openidConnect \
+                --name=Authelia \
+                --key=$(CLIENT_ID) \
+                --secret=$(CLIENT_SECRET)
+                --auto-discover-url=$(ISSUER_URL)/.well-known/openid-configuration \
+                --scopes="openid email profile groups" \
+                --group-claim-name=groups \
+                --admin-group=gitea_admin \
+                --restricted-group=gitea_restricted \
+                --skip-local-2fa=true \
+                --icon-url=$(ISSUER_URL)/favicon.ico \
+          envFrom:
+            - secretRef:
+                name: gitea-add-oidc-env
