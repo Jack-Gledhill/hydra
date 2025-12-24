@@ -54,6 +54,17 @@ spec:
           name: credentials-authelia
         disablePassword: false
         ensure: present
+      - name: jellyseerr
+        comment: Database and role for Jellyseerr
+        login: true
+        inherit: true
+        connectionLimit: -1
+        superuser: false
+        inRoles: [ ]
+        passwordSecret:
+          name: credentials-jellyseerr
+        disablePassword: false
+        ensure: present
   primaryUpdateStrategy: unsupervised
   storage:
     storageClass: local
