@@ -13,6 +13,9 @@ spec:
     - name: immich
       port: 2283
       targetPort: 2283
+    - name: jellyfin
+      port: 8096
+      targetPort: 8096
     - name: portainer
       port: 9000
       targetPort: 9000

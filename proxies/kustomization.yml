@@ -10,3 +10,4 @@ resources:
   - wopi.yml
   - immich.yml
   - proxmox.yml
+  - jellyfin.yml
