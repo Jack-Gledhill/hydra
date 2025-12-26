@@ -11,3 +11,4 @@ resources:
   - immich.yml
   - proxmox.yml
   - jellyfin.yml
+  - tdarr.yml

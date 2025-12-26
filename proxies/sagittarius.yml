@@ -16,6 +16,9 @@ spec:
     - name: jellyfin
       port: 8096
       targetPort: 8096
+    - name: tdarr
+      port: 8265
+      targetPort: 8265
     - name: portainer
       port: 9000
       targetPort: 9000
