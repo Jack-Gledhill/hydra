@@ -20,3 +20,4 @@ resources:
   - radarr.yml
   - sonarr.yml
   - tdarr.yml
+  - qbittorrent.yml
