@@ -13,3 +13,4 @@ resources:
   - jellyfin.yml
   - tdarr.yml
   - jellyseerr.yml
+  - jellystat.yml

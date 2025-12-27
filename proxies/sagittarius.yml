@@ -13,6 +13,9 @@ spec:
     - name: immich
       port: 2283
       targetPort: 2283
+    - name: jellystat
+      port: 3000
+      targetPort: 3000
     - name: jellyseerr
       port: 5055
       targetPort: 5055
