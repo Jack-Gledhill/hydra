@@ -11,4 +11,12 @@ resources:
   - jellyfin.yml
   - jellyseerr.yml
   - jellystat.yml
+  - autobrr.yml
+  - bazarr.yml
+  - cleanuparr.yml
+  - lidarr.yml
+  - prowlarr.yml
+  - qui.yml
+  - radarr.yml
+  - sonarr.yml
   - tdarr.yml
