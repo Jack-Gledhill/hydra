@@ -34,6 +34,10 @@ spec:
     - name: qui-metrics
       port: 9074
       targetPort: 9074
+    - name: qbittorrent
+      port: 8080
+      targetPort: 8080
+
     - name: bazarr
       port: 6767
       targetPort: 6767
