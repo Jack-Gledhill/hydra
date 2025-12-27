@@ -21,3 +21,4 @@ resources:
   - sonarr.yml
   - tdarr.yml
   - qbittorrent.yml
+  - fileflows.yml

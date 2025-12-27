@@ -28,6 +28,10 @@ spec:
       port: 5055
       targetPort: 5055
 
+    - name: fileflows
+      port: 5000
+      targetPort: 5000
+
     - name: qui
       port: 7476
       targetPort: 7476
