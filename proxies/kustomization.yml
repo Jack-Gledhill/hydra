@@ -12,3 +12,4 @@ resources:
   - proxmox.yml
   - jellyfin.yml
   - tdarr.yml
+  - jellyseerr.yml
