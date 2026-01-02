@@ -144,6 +144,14 @@ data:
             wrap: true
           status:
             enabled: true
+        - title: Staff Intranet
+          description: Internal staff resources
+          link: https://sites.google.com/sheffield.ac.uk/su-intranet
+          icon:
+            url: https://assets.jackgledhill.com/img/ssu.webp
+            wrap: true
+          status:
+            enabled: true
         - title: StaffSavvy
           description: Time tracking and HR
           link: https://ssu.staffsavvy.me
