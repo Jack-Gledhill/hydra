@@ -144,6 +144,15 @@ data:
             wrap: true
           status:
             enabled: true
+        - title: Paiyroll
+          description: Payslips
+          link: https://login.paiyroll.com
+          icon:
+            name: basil:invoice-solid
+            wrap: true
+            color: "#3a7a9a"
+          status:
+            enabled: true
         - title: Staff Intranet
           description: Internal staff resources
           link: https://sites.google.com/sheffield.ac.uk/su-intranet
