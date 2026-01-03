@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: database-homarr
+  namespace: postgresql-cluster
+spec:
+  ensure: present # or absent
+  databaseReclaimPolicy: delete # or retain
+  name: homarr
+  owner: homarr
+  cluster:
+    name: postgresql

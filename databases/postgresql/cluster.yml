@@ -54,15 +54,15 @@ spec:
           name: credentials-authelia
         disablePassword: false
         ensure: present
-      - name: jellyseerr
-        comment: Database and role for Jellyseerr
+      - name: homarr
+        comment: Database and role for Homarr
         login: true
         inherit: true
         connectionLimit: -1
         superuser: false
         inRoles: [ ]
         passwordSecret:
-          name: credentials-jellyseerr
+          name: credentials-homarr
         disablePassword: false
         ensure: present
   primaryUpdateStrategy: unsupervised

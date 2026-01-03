@@ -8,9 +8,9 @@ resources:
   - credentials-gitea.yml
   - credentials-lldap.yml
   - credentials-authelia.yml
-  - credentials-jellyseerr.yml
+  - credentials-homarr.yml
   - database-baserow.yml
   - database-gitea.yml
   - database-lldap.yml
   - database-authelia.yml
-  - database-jellyseerr.yml
+  - database-homarr.yml
