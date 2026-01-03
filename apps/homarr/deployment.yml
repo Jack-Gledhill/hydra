@@ -29,11 +29,3 @@ spec:
               memory: 50Mi
             limits:
               memory: 1Gi
-          volumeMounts:
-            - name: config
-              mountPath: /app/data/config.yml
-              subPath: config.yml
-      volumes:
-        - name: config
-          configMap:
-            name: mafl-config
