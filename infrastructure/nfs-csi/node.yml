@@ -1,43 +1,33 @@
 kind: DaemonSet
 apiVersion: apps/v1
 metadata:
-  name: csi-nfs-node
+  name: nfs-csi-node
   namespace: kube-system
 spec:
-  updateStrategy:
-    rollingUpdate:
-      maxUnavailable: 1
-    type: RollingUpdate
   selector:
     matchLabels:
-      app: csi-nfs-node
+      app: nfs-csi
+      component: node
   template:
     metadata:
       labels:
-        app: csi-nfs-node
+        app: nfs-csi
+        component: node
     spec:
-      hostNetwork: true  # original nfs connection would be broken without hostNetwork setting
-      dnsPolicy: ClusterFirstWithHostNet  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
-      serviceAccountName: csi-nfs-node-sa
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccountName: nfs-csi-node
       priorityClassName: system-node-critical
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
-      nodeSelector:
-        kubernetes.io/os: linux
       tolerations:
-        - operator: "Exists"
+        - operator: Exists
       containers:
         - name: liveness-probe
-          image: registry.k8s.io/sig-storage/livenessprobe:v2.15.0
+          image: registry.k8s.io/sig-storage/livenessprobe:v2.17.0
           args:
             - --csi-address=/csi/csi.sock
             - --probe-timeout=3s
             - --http-endpoint=localhost:29653
             - --v=2
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
           resources:
             requests:
               cpu: 10m
@@ -48,8 +38,11 @@ spec:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
         - name: node-driver-registrar
-          image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+          image: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
           args:
             - --v=2
             - --csi-address=/csi/csi.sock
@@ -61,11 +54,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
-            - name: registration-dir
-              mountPath: /registration
           resources:
             requests:
               cpu: 10m
@@ -76,15 +64,13 @@ spec:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+            - name: registration-dir
+              mountPath: /registration
         - name: nfs
-          securityContext:
-            privileged: true
-            capabilities:
-              add: ["SYS_ADMIN"]
-              drop:
-                - ALL
-            allowPrivilegeEscalation: true
-          image: registry.k8s.io/sig-storage/nfsplugin:v4.11.0
+          image: registry.k8s.io/sig-storage/nfsplugin:v4.12.1
           args:
             - "-v=5"
             - "--nodeid=$(NODE_ID)"
@@ -105,19 +91,26 @@ spec:
             initialDelaySeconds: 30
             timeoutSeconds: 10
             periodSeconds: 30
-          imagePullPolicy: "IfNotPresent"
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
-            - name: pods-mount-dir
-              mountPath: /var/lib/kubelet/pods
-              mountPropagation: "Bidirectional"
           resources:
             requests:
               cpu: 10m
               memory: 20Mi
             limits:
               memory: 300Mi
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+              drop:
+                - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+            - name: pods-mount-dir
+              mountPath: /var/lib/kubelet/pods
+              mountPropagation: Bidirectional
       volumes:
         - name: socket-dir
           hostPath:
@@ -127,7 +120,7 @@ spec:
           hostPath:
             path: /var/lib/kubelet/pods
             type: Directory
-        - hostPath:
+        - name: registration-dir
+          hostPath:
             path: /var/lib/kubelet/plugins_registry
             type: Directory
-          name: registration-dir

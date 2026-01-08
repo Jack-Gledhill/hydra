@@ -1,48 +1,32 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: csi-nfs-controller
+  name: nfs-csi-controller
   namespace: kube-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: csi-nfs-controller
+      app: nfs-csi
+      component: controller
   template:
     metadata:
       labels:
-        app: csi-nfs-controller
+        app: nfs-csi
+        component: controller
     spec:
-      hostNetwork: true  # controller also needs to mount nfs to create dir
-      dnsPolicy: ClusterFirstWithHostNet  # available values: Default, ClusterFirstWithHostNet, ClusterFirst
-      serviceAccountName: csi-nfs-controller-sa
-      nodeSelector:
-        kubernetes.io/os: linux  # add "kubernetes.io/role: master" to run controller on master node
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccountName: nfs-csi-controller
       priorityClassName: system-cluster-critical
-      securityContext:
-        seccompProfile:
-          type: RuntimeDefault
-      tolerations:
-        - key: "node-role.kubernetes.io/master"
-          operator: "Exists"
-          effect: "NoSchedule"
-        - key: "node-role.kubernetes.io/controlplane"
-          operator: "Exists"
-          effect: "NoSchedule"
-        - key: "node-role.kubernetes.io/control-plane"
-          operator: "Exists"
-          effect: "NoSchedule"
-        - key: "CriticalAddonsOnly"
-          operator: "Exists"
-          effect: "NoSchedule"
       containers:
         - name: csi-provisioner
-          image: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+          image: registry.k8s.io/sig-storage/csi-provisioner:v5.3.0
           args:
             - "-v=2"
             - "--csi-address=$(ADDRESS)"
             - "--leader-election"
-            - "--leader-election-namespace=kube-system"
+            - "--leader-election-namespace=$(POD_NAMESPACE)"
             - "--extra-create-metadata=true"
             - "--feature-gates=HonorPVReclaimPolicy=true"
             - "--timeout=1200s"
@@ -50,79 +34,87 @@ spec:
           env:
             - name: ADDRESS
               value: /csi/csi.sock
-          volumeMounts:
-            - mountPath: /csi
-              name: socket-dir
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           resources:
-            limits:
-              memory: 400Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 400Mi
           securityContext:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
         - name: csi-resizer
-          image: registry.k8s.io/sig-storage/csi-resizer:v1.13.1
+          image: registry.k8s.io/sig-storage/csi-resizer:v1.14.0
           args:
             - "-csi-address=$(ADDRESS)"
             - "-v=2"
             - "-leader-election"
-            - "--leader-election-namespace=kube-system"
+            - "--leader-election-namespace=$(POD_NAMESPACE)"
             - '-handle-volume-inuse-error=false'
           env:
             - name: ADDRESS
               value: /csi/csi.sock
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           resources:
-            limits:
-              memory: 400Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 400Mi
           securityContext:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
         - name: csi-snapshotter
-          image: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
+          image: registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0
           args:
             - "--v=2"
             - "--csi-address=$(ADDRESS)"
-            - "--leader-election-namespace=kube-system"
+            - "--leader-election-namespace=$(POD_NAMESPACE)"
             - "--leader-election"
             - "--timeout=1200s"
             - "--retry-interval-max=30m"
           env:
             - name: ADDRESS
               value: /csi/csi.sock
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           resources:
-            limits:
-              memory: 200Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 200Mi
           securityContext:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
         - name: liveness-probe
-          image: registry.k8s.io/sig-storage/livenessprobe:v2.15.0
+          image: registry.k8s.io/sig-storage/livenessprobe:v2.17.0
           args:
             - --csi-address=/csi/csi.sock
             - --probe-timeout=3s
             - --http-endpoint=localhost:29652
             - --v=2
-          volumeMounts:
-            - name: socket-dir
-              mountPath: /csi
           resources:
             limits:
               memory: 100Mi
@@ -133,16 +125,11 @@ spec:
             capabilities:
               drop:
                 - ALL
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
         - name: nfs
-          image: registry.k8s.io/sig-storage/nfsplugin:v4.11.0
-          securityContext:
-            privileged: true
-            capabilities:
-              add: ["SYS_ADMIN"]
-              drop:
-                - ALL
-            allowPrivilegeEscalation: true
-          imagePullPolicy: IfNotPresent
+          image: registry.k8s.io/sig-storage/nfsplugin:v4.12.1
           args:
             - "-v=5"
             - "--nodeid=$(NODE_ID)"
@@ -154,6 +141,14 @@ spec:
                   fieldPath: spec.nodeName
             - name: CSI_ENDPOINT
               value: unix:///csi/csi.sock
+          securityContext:
+            privileged: true
+            allowPrivilegeEscalation: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+              drop:
+                - ALL
           livenessProbe:
             failureThreshold: 5
             httpGet:
@@ -166,15 +161,15 @@ spec:
           volumeMounts:
             - name: pods-mount-dir
               mountPath: /var/lib/kubelet/pods
-              mountPropagation: "Bidirectional"
-            - mountPath: /csi
-              name: socket-dir
+              mountPropagation: Bidirectional
+            - name: socket-dir
+              mountPath: /csi
           resources:
-            limits:
-              memory: 200Mi
             requests:
               cpu: 10m
               memory: 20Mi
+            limits:
+              memory: 200Mi
       volumes:
         - name: pods-mount-dir
           hostPath:
