@@ -10,7 +10,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - jetkvm.sagittarius.dev
+        - jetkvm.sagittarius.starsystem.dev
       secretName: sagittarius-jetkvm-tls
   rules:
     - host: jetkvm.sagittarius.starsystem.dev
